@@ -1,0 +1,15 @@
+---
+- name: "Check if dir exists {{ dotfiles_dest }}"
+  stat:
+    path: "{{ dotfiles_dest }}"
+  register: check_dir
+
+- name: "Clone private repository {{ dotfiles_repo }}"
+  become: false
+  expect:
+    command: "git clone {{ dotfiles_repo }} {{ dotfiles_dest }}"
+    responses:
+      Username: "{{ dotfiles_username }}"
+      Password: "{{ dotfiles_password }}"
+  no_log: false
+  when: (check_dir.stat.exists == false)

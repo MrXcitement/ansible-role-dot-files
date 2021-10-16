@@ -1,0 +1,12 @@
+---
+- hosts: all
+  vars_files:
+    - ../secrets.yml
+    - ../vars.yml
+
+  tasks:
+    - name: 'Test clone repo'
+      include_tasks: test_clone_repo.yml
+      loop: '{{ dotfiles }}'
+      loop_control:
+        label: '{{ item.dest }}'

@@ -1,0 +1,33 @@
+---
+- name: Converge
+  hosts: all
+
+  vars_files:
+    - secrets.yml
+    - vars.yml
+
+  pre_tasks:
+    - name: Update apt cache.
+      apt: update_cache=yes cache_valid_time=600
+      when: ansible_os_family == 'Debian'
+
+    - name: "Install git"
+      include_role:
+        name: geerlingguy.git
+
+    - name: "Install pexpect"
+      pip:
+        name: pexpect
+  become: true
+
+  tasks:
+    - name: "Install dotfiles"
+      include_role:
+        name: mrxcitement.dotfiles
+      vars:
+        dotfiles_repo: '{{ item.repo }}'
+        dotfiles_dest: '/home/{{ ansible_user }}/{{ item.dest }}'
+        dotfiles_version: '{{ item.version }}'
+        dotfiles_username: '{{ item.username | default("") }}'
+        dotfiles_password: '{{ item.password | default("") }}'
+      loop: '{{ dotfiles }}'

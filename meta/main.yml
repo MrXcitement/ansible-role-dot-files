@@ -1,0 +1,19 @@
+---
+dependencies:
+  - geerlingguy.git
+
+galaxy_info:
+  role_name: dotfiles
+  author: mrxcitement
+  description: A role to install a dotfiles repository
+  license: "license (MIT)"
+  min_ansible_version: 2.2
+  platforms:
+    - name: GenericLinux
+      versions:
+        - all
+        - any
+  galaxy_tags:
+    - development
+    - dotfiles
+    - configuration

@@ -1,0 +1,10 @@
+---
+dotfiles:
+  - repo: 'https://github.com/MrXcitement/dot-git.git'
+    dest: 'github/mrxcitement/dot-git'
+    version: main
+  - repo: 'https://gitlab.thebarkers.com/mike/dot-ssh'
+    dest: 'gitlab/mike/dot-ssh'
+    version: master
+    username: mike
+    password: '{{ gitlab_token }}'

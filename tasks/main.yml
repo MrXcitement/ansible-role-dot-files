@@ -1,0 +1,16 @@
+---
+- name: Include Clone Public tasks
+  include_tasks: clone_public.yml
+  when: (dotfiles_password|length == 0)
+
+- name: Include Clone Private tasks
+  include_tasks: clone_private.yml
+  when: (dotfiles_password|length > 0)
+
+- name: "Install dotfiles {{ dotfiles_dest }}"
+  become: false
+  register: install
+  shell:
+    chdir: "{{ dotfiles_dest }}"
+    cmd: ./install
+  changed_when: "install.stdout|length > 0"
