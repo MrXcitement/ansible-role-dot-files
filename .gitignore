@@ -1,3 +1,6 @@
 # ignore these folders
 build/
 .venv/
+
+# Ignore these files
+.vault.pw
