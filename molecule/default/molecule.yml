@@ -12,10 +12,5 @@ provisioner:
   config_options:
     defaults:
       vault_password_file: "${MOLECULE_SCENARIO_DIRECTORY}/.vault.pw"
-  inventory:
-    host_vars:
-      # use platform name
-      instance:
-        ansible_user: ansible
 verifier:
   name: ansible

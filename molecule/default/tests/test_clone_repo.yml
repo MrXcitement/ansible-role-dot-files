@@ -12,7 +12,6 @@
 
 - name: 'Find symbolic links to the directroy {{ item.dest }}'
   command:
-    chdir: '/home/{{ ansible_user }}'
     cmd: "find . -lname '*{{ item.dest }}*'"
   register: find
   changed_when: False
