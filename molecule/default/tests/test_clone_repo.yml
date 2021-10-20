@@ -1,8 +1,12 @@
 ---
 # test that a repo has been cloned
-- name: 'Get the status of the directory {{ item.dest }}'
+- name: Get current user's home directory
+  set_fact:
+    dotfiles_home: '/home/{{ ansible_user_id }}/'
+
+- name: 'Get the status of the directory {{ dotfiles_home }}{{ item.dest }}'
   stat:
-    path: '{{ item.dest }}'
+    path: '{{ dotfiles_home }}{{ item.dest }}'
   register: stat_path
 
 - name: 'Assert the directory exists'
@@ -12,7 +16,7 @@
 
 - name: 'Find symbolic links to the directroy {{ item.dest }}'
   command:
-    cmd: "find . -lname '*{{ item.dest }}*'"
+    cmd: "find {{ dotfiles_home }} -lname '*{{ item.dest }}*'"
   register: find
   changed_when: False
 

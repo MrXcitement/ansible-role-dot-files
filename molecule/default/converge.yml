@@ -9,19 +9,22 @@
   pre_tasks:
     - name: Update apt cache.
       apt: update_cache=yes cache_valid_time=600
+      become: yes
       when: ansible_os_family == 'Debian'
 
-    - name: "Install git"
-      include_role:
-        name: geerlingguy.git
-
-    - name: "Install pexpect"
-      pip:
-        name: pexpect
-  become: true
-
   tasks:
-    - name: "Install dotfiles"
+    - name: Install prerequisites
+      block:
+      - name: Install pexpect
+        pip:
+          name: pexpect
+
+      - name: Install git
+        import_role:
+          name: geerlingguy.git
+      become: yes
+
+    - name: Install dotfiles
       include_role:
         name: mrxcitement.dotfiles
       vars:

@@ -1,6 +1,5 @@
 ---
 dependencies:
-  - geerlingguy.git
 
 galaxy_info:
   role_name: dotfiles

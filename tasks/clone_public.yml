@@ -1,7 +1,6 @@
 ---
-- name: "Clone repository {{ dotfiles_repo }}"
-  become: false
+- name: "Clone repository {{ dotfiles_repo }} to {{ dotfiles_home }}{{ dotfiles_dest }}"
   git:
     repo: "{{ dotfiles_repo }}"
-    dest: "{{ dotfiles_dest }}"
+    dest: "{{ dotfiles_home }}{{ dotfiles_dest }}"
     version: "{{ dotfiles_version }}"
